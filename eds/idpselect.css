@@ -39,6 +39,15 @@ a {
     text-decoration: underline;
 }
 
+div.IdPSelectPreferredIdPButton {
+    display: inline-block;
+    padding: 10px;
+}
+
+img.IdPSelectIdPImg {
+    width: 120px;
+}
+
 #idpSelect {
     text-align: center;
 }
@@ -47,8 +56,7 @@ a {
 #idpSelectIdPSelector
 {
     max-width: 600px;
-    text-align: left;
-    white-space: nowrap;
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
 }
@@ -60,76 +68,18 @@ a {
 
 /* Next down are the idpSelectPreferredIdPTile, idpSelectIdPEntryTile & idpSelectIdPListTile */
 
-/** 
- * The preferred IdP tile (if present) has a specified height, so
- * we can fit the preselected * IdPs in there
- */
-#idpSelectPreferredIdPTile
-{
-    height:138px; /* Force the height so that the  selector box
-                   * goes below when there is only one preslect 
-                   */
-}
+
 #idpSelectPreferredIdPTileNoImg
 {
     height:60px;
-}
-
-/***
- *  The preselect buttons
- */
-div.IdPSelectPreferredIdPButton
-{
-    margin: 3px;
-    width: 120px;  /* Make absolute because 3 of these must fit inside 
-                      div.IdPSelect{width} with not much each side. */
-    float: left;
-}
-
-/*
- *  Make the entire box look like a hyperlink
- */
-div.IdPSelectPreferredIdPButton a
-{
-    float: left;
-    width: 99%; /* Need a specified width otherwise we'll fit
-                   the contents which we don't want because
-                   they have auto margins */
-    
 }
 
 div.IdPSelectTextDiv{
     display: none;
 }
 
-img.IdPSelectIdPImg {
-   width:auto;
-}
-
 div.IdPSelectautoDispatchTile {
     display: block;
-}
-
-div.IdPSelectPreferredIdPButton img
-{
-    display: block;    /* Block display to allow auto centring */
-    max-width:  114px; /* Specify max to allow scaling, percent does work */
-    max-height: 64px;  /* Specify max to allow scaling, percent doesn't work */
-    margin-top: 3px ;
-    margin-bottom: 3px ;
-    border: solid 0px #000000;  /* Strip any embellishments the brower may give us */
-    margin-left: auto; /* Auto centring */
-    margin-right: auto;  /* Auto centring */
-
-}
-
-div.IdPSelectPreferredIdPButton div.IdPSelectTextDiv
-{
-    text-align: center;
-    font-size: 12px;
-    font-weight: normal;
-    max-width: 95%;
-    height: 30px;
 }
 
 /*
