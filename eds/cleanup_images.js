@@ -12,7 +12,6 @@ $("img.IdPSelectIdPImg").on("error", function() {
     }
 
     let imagePath = "missing_logos/" + entityID + ".png";
-    console.log(imagePath);
     $(this).attr("src", imagePath);
     $(this).removeAttr("width");
     $(this).removeAttr("height");
