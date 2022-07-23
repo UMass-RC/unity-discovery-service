@@ -22,8 +22,8 @@ function IdPSelectLanguages(){
         'idpList.label': 'Or select your organization from the list below',
         'idpList.NoPreferred.label': 'Select your organization from the list below',
         'idpList.defaultOptionLabel': 'Please select your organization...',
-        'idpList.showList' : 'Allow me to pick from a list',
-        'idpList.showSearch' : 'Allow me to specify the site',
+        'idpList.showList' : 'Pick from a list instead',
+        'idpList.showSearch' : 'Search instead',
         'submitButton.label': 'Continue',
         'helpText': 'Help',
         'defaultLogoAlt' : 'DefaultLogo',
@@ -31,7 +31,9 @@ function IdPSelectLanguages(){
         'autoFollow.never' : 'Never',
         'autoFollow.time0' : 'One day',
         'autoFollow.time1' : '3 months',
-        'autoFollow.time2' : '9 months'
+        'autoFollow.time2' : '9 months',
+        'search.others': 'Or Search for Others Below',
+        'org.click': 'Select an Organization to Sign In'
     },
     'de': {
         'fatal.divMissing': 'Das notwendige Div Element fehlt',

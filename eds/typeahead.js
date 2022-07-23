@@ -217,7 +217,7 @@ TypeAheadControl.prototype.showDrop = function() {
         }
     }
     this.dropDown.style.visibility = 'visible';
-    this.dropDown.style.width = this.textBox.offsetWidth +"px";
+    this.dropDown.style.width = String(parseInt(this.textBox.offsetWidth) - 2) +"px";
     this.textBox.setAttribute('aria-expanded', 'true');
 };
 

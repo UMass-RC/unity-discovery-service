@@ -1,5 +1,6 @@
 :root {
     --accent-color: #404040;
+    --accent-hover: #505050;
     --accent-color-fg: #ffffff;
     --element-border: #cccccc;
     --element-hover: #d9d9d9;
@@ -17,6 +18,7 @@ header {
     background: var(--accent-color);
     color: var(--accent-color-fg);
     border-radius: 0 0 15px 15px;
+    margin: 0 20px 0 20px;
 }
 
 header > img {
@@ -26,7 +28,7 @@ header > img {
 header > span {
     display: block;
     margin-top: 20px;
-    font-size: 20pt;
+    font-size: 18pt;
     font-weight: bold;
 }
 
@@ -39,13 +41,30 @@ a {
     text-decoration: underline;
 }
 
+span.header {
+    display: block;
+    font-size: 18pt;
+    font-weight: bold;
+    color: var(--accent-color);
+    border-bottom: 1px solid var(--element-border);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 15px;
+}
+
 div.IdPSelectPreferredIdPButton {
     display: inline-block;
-    padding: 10px;
+    vertical-align: middle;
+    padding: 20px;
 }
 
 img.IdPSelectIdPImg {
-    width: 120px;
+    width: 140px;
+}
+
+#idpSelectIdPEntryTile, #idpSelectIdPListTile {
+    padding-top: 15px;
 }
 
 #idpSelect {
@@ -67,7 +86,9 @@ img.IdPSelectIdPImg {
 }
 
 /* Next down are the idpSelectPreferredIdPTile, idpSelectIdPEntryTile & idpSelectIdPListTile */
-
+#idpSelectPreferredIdPTile {
+    padding-bottom: 50px;
+}
 
 #idpSelectPreferredIdPTileNoImg
 {
@@ -85,45 +106,50 @@ div.IdPSelectautoDispatchTile {
 /*
  * Force the size of the selectors and the buttons
  */
+#idpSelectInput {
+    width: calc(100% - 20px - 4px);
+}
+
+#idpSelectSelector {
+    width: 100%;
+}
+
 #idpSelectInput, #idpSelectSelector
 {
-    width: 100%;
     padding: 10px;
     border-radius: 10px;
     border: 2px solid var(--element-border);
-    transition: background 0.3s;
 }
 
-#idpSelectSelector:hover {
-    background: var(--element-hover);
+#idpSelectInput:focus, #idpSelectSelector:focus {
+    outline-color: var(--accent-color);
 }
 
 #idpSelectSelector > option {
     height: 50px;
 }
 
-/**
- * Drop down (incremental search) stuff - see the associated javascript for reference
- */
 ul.IdPSelectDropDown {
-    /*-moz-box-sizing: border-box;*/
-    font-size: small;
-    /*box-sizing: border-box;*/
+    font-size: 12pt;
     list-style: none;
     padding-left: 0px;
-    border: 1px solid #1a1a1a;
+    margin-top: 0;
+    margin-left: -2px;
+    border: 2px solid var(--element-border);
+    background-color: var(--accent-color-fg);
     z-index: 6;
     position: absolute;
+    border-radius: 0 0 10px 10px;
 }
 
 ul.IdPSelectDropDown li {
-    background-color: #eeeeee;
     cursor: default;
-    padding: 0px 3px;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 ul.IdPSelectDropDown li.IdPSelectCurrent {
-    background-color: #999999;
+    background-color: var(--element-hover);
     color: #1a1a1a;
 }
 
@@ -133,9 +159,14 @@ ul.IdPSelectDropDown li.IdPSelectCurrent {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
-    border: 2px solid var(--element-border);
+    border: 0;
     background: var(--accent-color);
     color: var(--accent-color-fg);
     font-size: 14pt;
     font-weight: bold;
+    cursor: pointer;
+}
+
+#idpSelectSelectButton:hover, #idpSelectListButton:hover {
+    background: var(--accent-hover);
 }

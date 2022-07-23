@@ -25,7 +25,6 @@ function IdPSelectUI() {
     //
     var preferredIdP;
     var maxPreferredIdPs;
-    var helpURL;
     var ie6Hack;
     var samlIdPCookieTTL;
     var maxIdPCharsDropDown;
@@ -151,7 +150,6 @@ function IdPSelectUI() {
 
         preferredIdP = paramsSupplied.preferredIdP;
         maxPreferredIdPs = paramsSupplied.maxPreferredIdPs;
-        helpURL = paramsSupplied.helpURL;
         ie6Hack = paramsSupplied.ie6Hack;
         samlIdPCookieTTL = paramsSupplied.samlIdPCookieTTL;
         alwaysShow = paramsSupplied.alwaysShow;
@@ -803,6 +801,11 @@ function IdPSelectUI() {
     */
     var buildPreferredIdPTile = function(parentDiv) {
 
+        var header = document.createElement("span");
+        header.setAttribute("class", "header");
+        header.innerHTML = getLocalizedMessage('org.click');
+        parentDiv.appendChild(header);
+
         var preferredIdPs = getPreferredIdPs();
         if (0 === preferredIdPs.length) {
             return false;
@@ -876,8 +879,6 @@ function IdPSelectUI() {
        @return {Element} IdP entry UI tile
     */
     var buildIdPEntryTile = function(parentDiv, preferredTile) {
-
-
         idpEntryDiv = buildDiv('IdPEntryTile');
         if (showListFirst) {
             idpEntryDiv.style.display = 'none';
@@ -892,6 +893,19 @@ function IdPSelectUI() {
             buildTextDiv(label, 'idpEntry.NoPreferred.label');
         }
 
+        var a = document.createElement('a');
+        a.appendChild(document.createTextNode(getLocalizedMessage('idpList.showList')));
+        a.href = '#';
+        setClass(a, 'DropDownToggle');
+        a.onclick = function() { 
+            idpEntryDiv.style.display='none';
+            setSelector(idpSelect, hidden.value);
+            idpListDiv.style.display='';
+            listButton.focus();
+            return false;
+        };
+        idpEntryDiv.appendChild(a);        
+
         var form = buildSelectForm();
         form.appendChild(label);
       
@@ -899,6 +913,7 @@ function IdPSelectUI() {
         form.appendChild(textInput);
 
         textInput.type='text';
+        textInput.setAttribute("placeholder", "Or search for other organizations...")
         setID(textInput, 'Input');
 
         var hidden = document.createElement('input');
@@ -928,21 +943,7 @@ function IdPSelectUI() {
         };
 
         dropDownControl = new TypeAheadControl(idpData, textInput, hidden, button, maxIdPCharsDropDown, getLocalizedName, getEntityId, geticon, ie6Hack, alwaysShow, maxResults, getKeywords);
-
-        var a = document.createElement('a');
-        a.appendChild(document.createTextNode(getLocalizedMessage('idpList.showList')));
-        a.href = '#';
-        setClass(a, 'DropDownToggle');
-        a.onclick = function() { 
-            idpEntryDiv.style.display='none';
-            setSelector(idpSelect, hidden.value);
-            idpListDiv.style.display='';
-            listButton.focus();
-            return false;
-        };
-        idpEntryDiv.appendChild(a);
-        buildHelpText(idpEntryDiv);
-                                              
+                                
         parentDiv.appendChild(idpEntryDiv);
     };
     
@@ -976,6 +977,20 @@ function IdPSelectUI() {
         } else {
             buildTextDiv(label, 'idpList.NoPreferred.label');
         }
+
+        //
+        // The switcher
+        //
+        var a = document.createElement('a');
+        a.appendChild(document.createTextNode(getLocalizedMessage('idpList.showSearch')));
+        a.href = '#';
+        setClass(a, 'DropDownToggle');
+        a.onclick = function() { 
+            idpEntryDiv.style.display='';
+            idpListDiv.style.display='none';
+            return false;
+        };
+        idpListDiv.appendChild(a);
 
         idpSelect = document.createElement('select');
         setID(idpSelect, 'Selector');
@@ -1018,21 +1033,6 @@ function IdPSelectUI() {
 
         idpListDiv.appendChild(form);
 
-        //
-        // The switcher
-        //
-        var a = document.createElement('a');
-        a.appendChild(document.createTextNode(getLocalizedMessage('idpList.showSearch')));
-        a.href = '#';
-        setClass(a, 'DropDownToggle');
-        a.onclick = function() { 
-            idpEntryDiv.style.display='';
-            idpListDiv.style.display='none';
-            return false;
-        };
-        idpListDiv.appendChild(a);
-        buildHelpText(idpListDiv);
-
         parentDiv.appendChild(idpListDiv);
     };
 
@@ -1041,44 +1041,26 @@ function IdPSelectUI() {
 
         autoDispatchTile = buildDiv(undefined, 'autoDispatchArea');
 
-        autoDispatchTile.appendChild(document.createTextNode(getLocalizedMessage('autoFollow.message')));
         //
         // The "clear" button
         //
         var but = document.createElement('input');
-        but.setAttribute('type', 'radio');
-        but.setAttribute('checked', 'checked');
+        but.setAttribute('type', 'checkbox');
+        //but.setAttribute('checked', 'checked');
         but.setAttribute('name', inputName);
+        but.setAttribute('id', inputName);
         but.onclick = function () {
             setAutoDispatchCookie(0);
         }
 
         div = buildDiv(undefined, 'autoDispatchTile');
         div.appendChild(but);
-        div.appendChild(document.createTextNode(getLocalizedMessage('autoFollow.never')));
+
+        var check_label = document.createElement("label");
+        check_label.setAttribute("for", inputName);
+        check_label.innerHTML = "Remember Selection";
+        div.appendChild(check_label);
         autoDispatchTile.appendChild(div);
-
-        var i;
-        for (i = 0; i < autoFollowCookieTTLs.length; i++) {
-            //
-            // The timed buttons
-            //
-            but = document.createElement('input');
-            but.setAttribute('type', 'radio');
-            but.setAttribute('name', inputName);
-
-            but.life = autoFollowCookieTTLs[i];
-            but.onclick = function () {
-                var f = this.life;
-                setAutoDispatchCookie(f);
-            }
-
-            div = buildDiv(undefined, 'autoDispatchTile');
-            div.appendChild(but);
-            div.appendChild(document.createTextNode(
-                getLocalizedMessage('autoFollow.time'+i)));
-            autoDispatchTile.appendChild(div);
-        }
 
         parent.appendChild(autoDispatchTile);
     }
@@ -1096,18 +1078,6 @@ function IdPSelectUI() {
 
         return button;
     };
-
-    /**
-       Builds an aref to point to the helpURL
-    */
-
-    var buildHelpText = function(containerDiv) {
-        var aval = document.createElement('a');
-        aval.href = helpURL;
-        aval.appendChild(document.createTextNode(getLocalizedMessage('helpText')));
-        setClass(aval, 'HelpButton');
-        containerDiv.appendChild(aval);
-    } ;
     
     /**
        Creates a div element whose id attribute is set to the given ID.
@@ -1354,7 +1324,7 @@ function IdPSelectUI() {
         //
         // And then the cookie based ones
         //
-        userSelectedIdPs = retrieveUserSelectedIdPs();
+        /*userSelectedIdPs = retrieveUserSelectedIdPs();
         for (i = offset, j=0; j < userSelectedIdPs.length && i < maxPreferredIdPs; j++){
             var cur_idp = getIdPFor(userSelectedIdPs[j]);
             if (typeof idps.indexOf === 'undefined') {
@@ -1365,7 +1335,7 @@ function IdPSelectUI() {
                 idps.push(cur_idp);
                 i++;
             }
-        }
+        }*/
         return idps;
     };
 

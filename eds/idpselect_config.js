@@ -15,14 +15,13 @@ function IdPSelectUIParms(){
     //this.defaultReturn = "https://example.org/Shibboleth.sso/DS?SAMLDS=1&target=https://example.org/secure";
     this.defaultReturnIDParam = null;
     this.returnWhiteList = [ "^https:\/\/unity\.rc\.umass\.edu\/Shibboleth\.sso\/Login.*$", "^https:\/\/unity\.uri\.edu\/Shibboleth\.sso\/Login.*$", "^https:\/\/ood\.unity\.rc\.umass\.edu\/Shibboleth\.sso\/Login.*$", "^https:\/\/xdmod\.unity\.rc\.umass\.edu\/Shibboleth\.sso\/Login.*$" ];
-    this.helpURL = 'https://wiki.shibboleth.net/confluence/display/SHIB2/DSRoadmap';
     this.ie6Hack = null;             // An array of structures to disable when drawing the pull down (needed to 
                                      // handle the ie6 z axis problem
     this.insertAtDiv = 'idpSelect';  // The div where we will insert the data
     this.maxResults = 10;            // How many results to show at once or the number at which to
                                      // start showing if alwaysShow is false
     this.myEntityID = null;          // If non null then this string must match the string provided in the DS parms
-    this.preferredIdP = [ "https://webauth.umass.edu/idp/shibboleth", "https://sso.uri.edu/idp", "https://idp.umassd.edu/idp/shibboleth", "https://vm-shibboleth.umb.edu/idp/shibboleth", "urn:mace:incommon:mit.edu", "https://neuidmsso.neu.edu/idp/shibboleth", "https://shib.bu.edu/idp/shibboleth", "https://fed.huit.harvard.edu/idp/shibboleth" ];        // Array of entityIds to always show
+    this.preferredIdP = [ "https://webauth.umass.edu/idp/shibboleth", "https://sso.uri.edu/idp", "https://idp.umassd.edu/idp/shibboleth" ];        // Array of entityIds to always show
     this.hiddenIdPs = null;          // Array of entityIds to delete
     this.ignoreKeywords = false;     // Do we ignore the <mdui:Keywords/> when looking for candidates
     this.showListFirst = false;      // Do we start with a list of IdPs or just the dropdown
@@ -30,8 +29,8 @@ function IdPSelectUIParms(){
     this.setFocusTextBox = true;     // Set to false to supress focus 
     this.testGUI = false;
 
-    this.autoFollowCookie = null;  //  If you want auto-dispatch, set this to the cookie name to use
-    this.autoFollowCookieTTLs = [ 1, 60, 270 ]; // Cookie life (in days).  Changing this requires changes to idp_select_languages
+    this.autoFollowCookie = "_saml_idp_auto";  //  If you want auto-dispatch, set this to the cookie name to use
+    this.autoFollowCookieTTLs = 60; // Cookie life (in days).  Changing this requires changes to idp_select_languages
 
     //
     // Language support. 
@@ -68,7 +67,7 @@ function IdPSelectUIParms(){
     //
     // The following should not be changed without changes to the css.  Consider them as mandatory defaults
     //
-    this.maxPreferredIdPs = 9;
+    this.maxPreferredIdPs = 3;
     this.maxIdPCharsButton = 33;
     this.maxIdPCharsDropDown = 58;
     this.maxIdPCharsAltTxt = 60;
