@@ -21,7 +21,7 @@ function IdPSelectUIParms(){
     this.maxResults = 10;            // How many results to show at once or the number at which to
                                      // start showing if alwaysShow is false
     this.myEntityID = null;          // If non null then this string must match the string provided in the DS parms
-    this.preferredIdP = [ "https://webauth.umass.edu/idp/shibboleth", "https://sso.uri.edu/idp", "https://idp.umassd.edu/idp/shibboleth" ];        // Array of entityIds to always show
+    this.preferredIdP = [ "https://webauth.umass.edu/idp/shibboleth", "https://sso.uri.edu/idp", "https://idp.umassd.edu/idp/shibboleth", "https://sso.uml.edu/idp", "https://vm-shibboleth.umb.edu/idp/shibboleth"  ];        // Array of entityIds to always show
     this.hiddenIdPs = null;          // Array of entityIds to delete
     this.ignoreKeywords = false;     // Do we ignore the <mdui:Keywords/> when looking for candidates
     this.showListFirst = false;      // Do we start with a list of IdPs or just the dropdown
@@ -67,7 +67,7 @@ function IdPSelectUIParms(){
     //
     // The following should not be changed without changes to the css.  Consider them as mandatory defaults
     //
-    this.maxPreferredIdPs = 3;
+    this.maxPreferredIdPs = 5;
     this.maxIdPCharsButton = 33;
     this.maxIdPCharsDropDown = 58;
     this.maxIdPCharsAltTxt = 60;
