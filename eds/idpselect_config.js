@@ -14,6 +14,8 @@ function IdPSelectUIParms() {
   //this.defaultReturn = "https://example.org/Shibboleth.sso/DS?SAMLDS=1&target=https://example.org/secure";
   this.defaultReturnIDParam = null;
   this.returnWhiteList = [
+    "^https://unity.rc.umass.edu:4443/Shibboleth.sso/Login.*$", // staging
+    "^https://web-dev.unity.rc.umass.edu/Shibboleth.sso/Login.*$",
     "^https://unity.rc.umass.edu/Shibboleth.sso/Login.*$",
     "^https://xdmod.unity.rc.umass.edu/Shibboleth.sso/Login.*$",
     "^https://ood.unity.rc.umass.edu/Shibboleth.sso/Login.*$",
@@ -22,6 +24,7 @@ function IdPSelectUIParms() {
     "^https://ood.unity.uri.edu/Shibboleth.sso/Login.*$",
     "^https://ood-dev.unity.uri.edu/Shibboleth.sso/Login.*$",
     "^https://rt.rc.umass.edu/Shibboleth.sso/Login.*$",
+    "^https://coldfront-dev.unity.rc.umass.edu/Shibboleth.sso/Login.*$",
   ];
   this.ie6Hack = null; // An array of structures to disable when drawing the pull down (needed to
   // handle the ie6 z axis problem
